@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<meta charset="utf-8">
+
+<title>Соединение</title>
+
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.1.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <ul id="tabs" class="nav nav-tabs">
+            <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
+            <li><a href="#practice" data-toggle="tab">Практикум</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="description">
+                <div class="row-fluid">
+                    <h2>Соединение (JOIN)</h2>
+                    <p>
+                        При соединении двух отношений по некоторому условию образуется результирующее отношение, кортежи которого являются конкатенацией кортежей первого и второго отношений и удовлетворяют этому условию.
+                    </p>
+					<p>
+						Пусть даны отношения R1(R11, R12,…, R1n, А1, А2,..., Аk) и R2(R21, R22,…, R2m, А1, А2,..., Аk) и , имеющие одинаковые атрибуты А1, А2,..., Аk (т.е. атрибуты с одинаковыми именами и определенные на одинаковых доменах).
+					</p>
+					<p>
+						Тогда естественным соединением отношений R1 и R2 называется отношение с заголовком (R11, R12,…, R1n, А1, А2,..., Аk, R21, R22,…, R2m) и телом, содержащим множество кортежей (r11, r12,…, r1n, a1, a2,..., ak, r21, r22,…, r2m), таких, что (r11, r12,…, r1n, a1, a2,..., ak)  R1 и (a1, a2,..., ak, r21, r22,…, r2m)  R2.
+					</p>
+					<p>
+						Естественное соединение настолько важно, что для него используют специальный синтаксис: R1 JOIN R2.
+					</p>
+					<img src="picture\join.jpg">
+					<p>
+						В синтаксисе естественного соединения не указываются, по каким атрибутам производится соединение. Естественное соединение производится по всем одинаковым атрибутам.
+					</p>
+					<p>
+						Естественное соединение эквивалентно следующей последовательности реляционных операций:
+					</p>
+					<p>
+						1.	Переименовать одинаковые атрибуты в отношениях.
+					</p>
+					<p>
+						2.	Выполнить декартово произведение отношений.
+					</p>
+					<p>
+						3.	Выполнить выборку по совпадающим значениям атрибутов, имевших одинаковые имена.
+					</p>
+					<p>
+						4.	Выполнить проекцию, удалив повторяющиеся атрибуты.
+					</p>
+					<p>
+						5.	Переименовать атрибуты, вернув им первоначальные имена.
+					</p>
+					<p>
+						Можно выполнять последовательное естественное соединение нескольких отношений. Нетрудно проверить, что естественное соединение (как, впрочем, и соединение общего вида) обладает свойством ассоциативности.
+					</p>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="practice">
+                <div class="row-fluid">
+                    <p>
+                        <table id="relation_A" class="table">
+                            <caption class="text-info"><h3>Отношение А</h3></caption>
+                            <thead>
+                                <tr>
+                                    <th>Идентификатор</th>
+                                    <th>Поставщик</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="1">
+                                    <td><input id="id" type="text" value="1" /></td>
+                                    <td><input id="supplier" type="text" value="Иванов" /></td>
+                                    <td><button class="btn btn-warning" onclick="removeRow('relation_A', 1)"><i class="icon-minus"></i></button></td>
+                                </tr>
+                                <tr id="2">
+                                    <td><input id="id" type="text" value="2" /></td>
+                                    <td><input id="supplier" type="text" value="Петров" /></td>
+                                    <td><button class="btn btn-warning" onclick="removeRow('relation_A', 2)"><i class="icon-minus"></i></button></td>
+                                </tr>
+                                <tr class="info">
+                                    <td><input id="id" type="text" value="" placeholder="Идентификатор" /></td>
+                                    <td><input id="supplier" type="text" value="" placeholder="Имя" /></td>
+                                    <td><button class="btn" onclick="addRow('relation_A')"><i class="icon-plus"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </p>
+                </div>
+                <hr />
+                <div class="row-fluid">
+                    <table id="relation_B" class="table">
+                        <caption class="text-info"><h3>Отношение Б</h3></caption>
+                        <thead>
+                            <tr>
+                                <th>Идентификатор</th>
+                                <th>Деталь</th>
+                                <th>Идентификатор (поставщик)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="3">
+                                <td><input id="id" type="text" value="1" /></td>
+                                <td><input id="detail" type="text" value="Гайка" /></td>
+                                <td><input id="supplier_id" type="text" value="1" /></td>
+                                <td><button class="btn btn-warning" onclick="removeRow('relation_B', 3)"><i class="icon-minus"></i></button></td>
+                            </tr>
+                            <tr id="4">
+                                <td><input id="id" type="text" value="2" /></td>
+                                <td><input id="detail" type="text" value="Болт" /></td>
+                                <td><input id="supplier_id" type="text" value="1" /></td>
+                                <td><button class="btn btn-warning" onclick="removeRow('relation_B', 4)"><i class="icon-minus"></i></button></td>
+                            </tr>
+                            <tr id="5">
+                                <td><input id="id" type="text" value="3" /></td>
+                                <td><input id="detail" type="text" value="Болт" /></td>
+                                <td><input id="supplier_id" type="text" value="2" /></td>
+                                <td><button class="btn btn-warning" onclick="removeRow('relation_B', 5)"><i class="icon-minus"></i></button></td>
+                            </tr>
+                            <tr class="info">
+                                <td><input id="id" type="text" value="" placeholder="Идентификатор" /></td>
+                                <td><input id="detail" type="text" value="" placeholder="Название" /></td>
+                                <td><input id="supplier_id" type="text" value="" placeholder="Поставщик" /></td>
+                                <td><button class="btn" onclick="addRow('relation_B')"><i class="icon-plus"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pull-right">
+                    <p>
+                        <button class="btn btn-primary btn-large" onclick="join('relation_A', 'id', 'relation_B', 'supplier_id', 'relation_AB')">Соединение</button>
+                    </p>
+                </div>
+                <div class="row-fluid">
+                     <table id="relation_AB" class="table table-bordered" style="display:none">
+                        <caption class="text-info"><h3>Отношение Б JOIN А</h3></caption>
+                        <thead>
+                            <tr>
+                                <th>Идентификатор (деталь)</th>
+                                <th>Деталь</th>
+                                <th>Идентификатор (поставщик)</th>
+                                <th>Поставщик</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script src="../assets/js/bootstrap.js" type="text/javascript"></script>
+
+    <script src="../js/operations.js" type="text/javascript"></script>
+    <script src="../js/tables.js" type="text/javascript"></script>
+    <script>
+
+        $(function () {
+            $("#tabs a").click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+        })
+
+    </script>
+</body>

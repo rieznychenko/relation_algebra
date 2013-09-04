@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<meta charset="utf-8">
+
+<title>Выборка</title>
+
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.1.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <ul id="tabs" class="nav nav-tabs">
+            <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
+            <li><a href="#practice" data-toggle="tab">Практикум</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="description">
+                <div class="row-fluid">
+                    <h2>Выборка (SELECTION)</h2>
+					<p>
+                        Результатом ограничения отношения по некоторому условию является отношение, включающее кортежи исходного отношения, удовлетворяющие этому условию.
+                    </p>
+                    <p>
+                        Выборкой (ограничением, селекцией) на отношении R с условием v называется отношение с тем же заголовком, что и у отношения R, и телом, состоящем из кортежей, значения атрибутов которых при подстановке в условие v дают значение TRUE. v представляет собой логическое выражение, в которое могут входить атрибуты отношения R и (или) скалярные выражения.
+                    </p>
+					<p>
+						В простейшем случае условие v имеет вид A1  A2, где  - один из операторов сравнения (=, ≠, <, ≤, >, ≥ и т.д.), а A1 и A2- атрибуты отношения R или скалярные значения.
+					</p>
+					<p>
+						Синтаксис операции выборки: R WHERE v или R WHERE A1  A2.
+					</p>
+					<img src="picture\select.jpg">
+					<p>
+						Смысл операции выборки очевиден – выбрать кортежи отношения, удовлетворяющие некоторому условию. Таким образом, операция выборки дает "горизонтальный срез" отношения по некоторому условию.
+					</p>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="practice">
+                <div class="row-fluid">
+                    <p>
+                        <table id="relation_A" class="table">
+                            <caption class="text-info"><h3>Отношение А</h3></caption>
+                            <thead>
+                                <tr>
+                                    <th>Идентификатор</th>
+                                    <th>Сотрудник</th>
+                                    <th>Заработная плата</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="1">
+                                    <td><input id="id" type="text" value="1" /></td>
+                                    <td><input id="name" type="text" value="Иванов" /></td>
+                                    <td><input id="salary" type="text" value="2000" /></td>
+                                    <td><button class="btn btn-warning" onclick="removeRow('relation_A', 1)"><i class="icon-minus"></i></button></td>
+                                </tr>
+                                <tr id="2">
+                                    <td><input id="id" type="text" value="2" /></td>
+                                    <td><input id="name" type="text" value="Петров" /></td>
+                                    <td><input id="salary" type="text" value="2500" /></td>
+                                    <td><button class="btn btn-warning" onclick="removeRow('relation_A', 2)"><i class="icon-minus"></i></button></td>
+                                </tr>
+                                <tr id="3">
+                                    <td><input id="id" type="text" value="3" /></td>
+                                    <td><input id="name" type="text" value="Сидоров" /></td>
+                                    <td><input id="salary" type="text" value="4500" /></td>
+                                    <td><button class="btn btn-warning" onclick="removeRow('relation_A', 3)"><i class="icon-minus"></i></button></td>
+                                </tr>
+                                <tr class="info">
+                                    <td><input id="id" type="text" value="" placeholder="Идентификатор" /></td>
+                                    <td><input id="name" type="text" value="" placeholder="Имя" /></td>
+                                    <td><input id="salary" type="text" value="" placeholder="Заработная плата" /></td>
+                                    <td><button class="btn" onclick="addRow('relation_A')"><i class="icon-plus"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </p>
+                </div>
+                <hr />
+                <div>
+                <p>
+                    Заработная плата:
+                    <select id="condition">
+                        <option value="greater_than">больше чем</option>
+                        <option value="not_greater_than">не больше чем</option>
+                    </select>
+                    <input id="limit" type="text" value="3000" placeholder="Сумма" />
+                </p>
+                </div>
+                <div class="pull-right">
+                    <p>
+                        <button class="btn btn-primary btn-large" onclick="select('relation_A', 'salary', 'condition', 'limit', 'relation_B', 'applied_condition')">Выборка</button>
+                    </p>
+                </div>
+                <div class="row-fluid">
+                     <table id="relation_B" class="table table-bordered" style="display:none">
+                        <caption class="text-info"><h3>Отношение А WHERE <span id="applied_condition"/></h3></caption>
+                        <thead>
+                            <tr>
+                                <th>Идентификатор</th>
+                                <th>Сотрудник</th>
+                                <th>Заработная плата</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script src="../assets/js/bootstrap.js" type="text/javascript"></script>
+
+    <script src="../js/operations.js" type="text/javascript"></script>
+    <script src="../js/tables.js" type="text/javascript"></script>
+    <script>
+
+        $(function () {
+            $("#tabs a").click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+        })
+
+    </script>
+</body>

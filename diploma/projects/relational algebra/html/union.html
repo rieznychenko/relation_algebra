@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<meta charset="utf-8">
+
+<title>Объединение</title>
+
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.1.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <ul id="tabs" class="nav nav-tabs">
+            <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
+            <li><a href="#practice" data-toggle="tab">Практикум</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="description">
+                <div class="row-fluid">
+                    <h2>Объединение (UNION)</h2>
+					<p>
+                        При выполнении операции объединения двух отношений производится отношение, включающее все кортежи, входящие хотя бы в одно из отношений.
+                    </p>
+                    <p>
+                        Объединением двух совместимых по типу отношений R1 и R2 называется отношение с тем же заголовком, что и у отношений R1 и R2 , и телом, состоящим из кортежей, принадлежащих или R1 , или R2, или обоим отношениям.
+                    </p>
+					<p>
+						Синтаксис операции объединения: R1 UNION R2
+					</p>
+					<img src="picture\union.jpg">
+					<p>
+						Объединение, как и любое отношение, не может содержать одинаковых кортежей. Поэтому, если некоторый кортеж входит и в отношение R1, и отношение R2, то в объединение он входит один раз.
+					</p>
+					<p>
+						Как видно из приведенного примера, потенциальные ключи, которые могли быть в отношениях R1 и R2 не наследуются объединением этих отношений. Поэтому, они могут содержать дубликаты значений. Если бы это было не так, и ключи наследовались бы, то это противоречило бы понятию объединения как "объединение множеств". Конечно, объединение отношений R1 и R2 имеет, как и любое отношение, потенциальный ключ, например, состоящий из всех атрибутов.
+					</p>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="practice">
+                <div class="row-fluid">
+                    <p>
+                        <table id="relation_A" class="table">
+                            <caption class="text-info"><h3>Отношение А</h3></caption>
+                            <thead>
+                                <tr>
+                                    <th>Идентификатор</th>
+                                    <th>Имя</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="1">
+                                    <td><input id="id" type="text" value="1" /></td>
+                                    <td><input id="name" type="text" value="Иванов" /></td>
+                                    <td><button class="btn btn-warning" onclick="removeRow('relation_A', 1)"><i class="icon-minus"></i></button></td>
+                                </tr>
+                                <tr id="2">
+                                    <td><input id="id" type="text" value="2" /></td>
+                                    <td><input id="name" type="text" value="Петров" /></td>
+                                    <td><button class="btn btn-warning" onclick="removeRow('relation_A', 2)"><i class="icon-minus"></i></button></td>
+                                </tr>
+                                <tr class="info">
+                                    <td><input id="id" type="text" value="" placeholder="Идентификатор" /></td>
+                                    <td><input id="name" type="text" value="" placeholder="Имя" /></td>
+                                    <td><button class="btn" onclick="addRow('relation_A')"><i class="icon-plus"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </p>
+                </div>
+                <hr />
+                <div class="row-fluid">
+                    <table id="relation_B" class="table">
+                        <caption class="text-info"><h3>Отношение Б</h3></caption>
+                        <thead>
+                            <tr>
+                                <th>Идентификатор</th>
+                                <th>Имя</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="3">
+                                <td><input id="id" type="text" value="2" /></td>
+                                <td><input id="name" type="text" value="Петров" /></td>
+                                <td><button class="btn btn-warning" onclick="removeRow('relation_B', 3)"><i class="icon-minus"></i></button></td>
+                            </tr>
+                            <tr id="4">
+                                <td><input id="id" type="text" value="3" /></td>
+                                <td><input id="name" type="text" value="Сидоров" /></td>
+                                <td><button class="btn btn-warning" onclick="removeRow('relation_B', 4)"><i class="icon-minus"></i></button></td>
+                            </tr>
+                            <tr class="info">
+                                <td><input id="id" type="text" value="" placeholder="Идентификатор" /></td>
+                                <td><input id="name" type="text" value="" placeholder="Имя" /></td>
+                                <td><button class="btn" onclick="addRow('relation_B')"><i class="icon-plus"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pull-right">
+                    <p>
+                        <button class="btn btn-primary btn-large" onclick="union('relation_A', 'relation_B', 'relation_AB')">Объединение</button>
+                    </p>
+                </div>
+                <div class="row-fluid">
+                     <table id="relation_AB" class="table table-bordered" style="display:none">
+                        <caption class="text-info"><h3>Отношение А UNION Б</h3></caption>
+                        <thead>
+                            <tr>
+                                <th>Идентификатор</th>
+                                <th>Имя</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script src="../assets/js/bootstrap.js" type="text/javascript"></script>
+
+    <script src="../js/operations.js" type="text/javascript"></script>
+    <script src="../js/tables.js" type="text/javascript"></script>
+    <script>
+
+        $(function () {
+            $("#tabs a").click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+        })
+
+    </script>
+</body>

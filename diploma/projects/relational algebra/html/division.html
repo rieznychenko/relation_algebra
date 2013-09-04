@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<meta charset="utf-8">
+
+<title>Деление</title>
+
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.1.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <ul id="tabs" class="nav nav-tabs">
+            <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
+            <li><a href="#practice" data-toggle="tab">Практикум</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="description">
+                <div class="row-fluid">
+                    <h2>Деление (DIVISION)</h2>
+                    <p>
+                        Для операции деления результирующее отношение состоит из одноатрибутных кортежей, включающих знаечние первого атрибута кортежей первого операнда таких, что множество значений второго атрибута (при фиксированном значении перавого атрибута) совпадает со множеством значений второго атрибута.
+                    </p>
+					<p>
+						Пусть даны отношения R1(R11, R12,…, R1n, А1, А2,..., Аk) и R2(А1, А2,..., Аk), причем атрибуты А1, А2,..., Аk - общие для двух отношений. Делением отношений R1 на R2 называется отношение с заголовком (R11, R12,…, R1n) и телом, содержащим множество кортежей (r11, r12,…, r1n,), таких, что для всех кортежей (a1, a2,..., ak)  R2 в отношении R1 найдется кортеж (r11, r12,…, r1n, a1, a2,..., ak).
+					</p>
+					<p>
+						Отношение R1 выступает в роли делимого, отношение R2 выступает в роли делителя. Деление отношений аналогично делению чисел с остатком.
+					</p>
+					<p>
+						Синтаксис операции деления: R1 DEVIDBY R2.
+					</p>
+					<img src="picture\union.jpg">
+					<p>
+						Типичные запросы, реализуемые с помощью операции деления, обычно в своей формулировке имеют слово "все".
+					</p>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="practice">
+                <div class="row-fluid">
+                    <p>
+                        <table id="relation_A" class="table">
+                            <caption class="text-info"><h3>Отношение А</h3></caption>
+                            <thead>
+                                <tr>
+                                    <th>Поставщик</th>
+                                    <th>Деталь</th>
+                                    <th>Количество деталей</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="1">
+                                    <td><input id="supplier" type="text" value="Иванов" /></td>
+                                    <td><input id="detail" type="text" value="Гайка" /></td>
+                                    <td><input id="amount" type="text" value="100" /></td>
+                                    <td><button class="btn btn-warning" onclick="removeRow('relation_A', 1)"><i class="icon-minus"></i></button></td>
+                                </tr>
+                                <tr id="2">
+                                    <td><input id="supplier" type="text" value="Иванов" /></td>
+                                    <td><input id="detail" type="text" value="Винт" /></td>
+                                    <td><input id="amount" type="text" value="50" /></td>
+                                    <td><button class="btn btn-warning" onclick="removeRow('relation_A', 2)"><i class="icon-minus"></i></button></td>
+                                </tr>
+                                <tr id="3">
+                                    <td><input id="supplier" type="text" value="Петров" /></td>
+                                    <td><input id="detail" type="text" value="Гайка" /></td>
+                                    <td><input id="amount" type="text" value="300" /></td>
+                                    <td><button class="btn btn-warning" onclick="removeRow('relation_A', 3)"><i class="icon-minus"></i></button></td>
+                                </tr>
+                                <tr id="4">
+                                    <td><input id="supplier" type="text" value="Сидоров" /></td>
+                                    <td><input id="detail" type="text" value="Болт" /></td>
+                                    <td><input id="amount" type="text" value="300" /></td>
+                                    <td><button class="btn btn-warning" onclick="removeRow('relation_A', 4)"><i class="icon-minus"></i></button></td>
+                                </tr>
+                                <tr class="info">
+                                    <td><input id="supplier" type="text" value="" placeholder="Поставщик" /></td>
+                                    <td><input id="detail" type="text" value="" placeholder="Деталь" /></td>
+                                    <td><input id="amount" type="text" value="" placeholder="Количество" /></td>
+                                    <td><button class="btn" onclick="addRow('relation_A')"><i class="icon-plus"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </p>
+                </div>
+                <hr />
+                <div class="row-fluid">
+                    <table id="relation_B" class="table" style="width:auto;">
+                        <caption class="text-info"><h3>Отношение Б</h3></caption>
+                        <thead>
+                            <tr>
+                                <th>Деталь</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="5">
+                                <td><input id="detail" type="text" value="Гайка" /></td>
+                                <td><button class="btn btn-warning" onclick="removeRow('relation_B', 5)"><i class="icon-minus"></i></button></td>
+                            </tr>
+                            <tr id="6">
+                                <td><input id="detail" type="text" value="Винт" /></td>
+                                <td><button class="btn btn-warning" onclick="removeRow('relation_B', 6)"><i class="icon-minus"></i></button></td>
+                            </tr>
+                            <tr class="info">
+                                <td><input id="detail" type="text" value="" placeholder="Новая деталь" /></td>
+                                <td><button class="btn" onclick="addRow('relation_B')"><i class="icon-plus"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pull-right">
+                    <p>
+                        <button class="btn btn-primary btn-large" onclick="divide('relation_A', 'relation_B', 'detail', 'relation_AB', 'supplier')">Деление</button>
+                    </p>
+                </div>
+                <div class="row-fluid">
+                     <table id="relation_AB" class="table table-bordered" style="display:none">
+                        <caption class="text-info"><h3>Отношение А DIVIDE BY Б</h3></caption>
+                        <thead>
+                            <tr>
+                                <th>Поставщик</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script src="../assets/js/bootstrap.js" type="text/javascript"></script>
+
+    <script src="../js/operations.js" type="text/javascript"></script>
+    <script src="../js/tables.js" type="text/javascript"></script>
+    <script>
+
+        $(function () {
+            $("#tabs a").click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+        })
+
+    </script>
+</body>

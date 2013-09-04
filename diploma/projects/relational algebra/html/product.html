@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<meta charset="utf-8">
+
+<title>Произведение</title>
+
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.1.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <ul id="tabs" class="nav nav-tabs">
+            <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
+            <li><a href="#practice" data-toggle="tab">Практикум</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="description">
+                <div class="row-fluid">
+                    <h2>Произведение (CARTESIAN PRODUCT)</h2>
+					<p>
+                        При выполнении прямого произведения двух отношений производится отношщение, кортежи которого являются конкатенацией (сцеплением) кортежей исходных отношений.
+                    </p>
+                    <p>
+                        Декартовым произведением двух отношений R1(R11, R12,…, R1n) и R2(R21, R22,…, R2m) называется отношение, заголовок которого является сцеплением заголовков отношений R1 и R2:
+                    </p>
+					<p>
+						(R11, R12,… ,R1n, R21, R22,…, R2m),
+					</p>
+					<p>
+						а тело состоит из кортежей, являющихся сцеплением кортежей отношений R1и R2:
+					</p>
+					<p>
+						(r11, r12,…,r1n, r21, r22,…,r2m),
+					</p>
+					<p>
+						таких, что (r11, r12,…,r1n)  R1, (r21, r22,…,r2m)  R2.
+					</p>
+					<p>
+						Синтаксис операции декартового произведения: R1 TIMES R2
+					</p>
+					<img src="picture\carteslan_product.jpg">
+					<p>
+						Мощность произведения R1 TIMES R2 равна произведению мощностей отношений R1 и R2, т.к. каждый кортеж отношения R1 соединяется с каждым кортежем отношения R2.
+					</p>
+					<p>
+						Если в отношения R1 и R2 имеются атрибуты с одинаковыми наименованиями, то перед выполнением операции декартового произведения такие атрибуты необходимо переименовать.
+					</p>
+					<p>
+						Перемножать можно любые два отношения, совместимость по типу при этом не требуется.
+					</p>
+					<p>
+						Сама по себе операция декартового произведения не очень важна, т.к. она не дает никакой новой информации, по сравнению с исходными отношениями. Для реальных запросов эта операция почти никогда не используется. Однако операция декартового произведения важна для выполнения специальных реляционных операций, о которых речь пойдет ниже.
+					</p>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="practice">
+                <div class="row-fluid">
+                    <p>
+                        <table id="relation_A" class="table">
+                            <caption class="text-info"><h3>Отношение А</h3></caption>
+                            <thead>
+                                <tr>
+                                    <th>Идентификатор</th>
+                                    <th>Поставщик</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="1">
+                                    <td><input id="id" type="text" value="1" /></td>
+                                    <td><input id="name" type="text" value="Иванов" /></td>
+                                    <td><button class="btn btn-warning" onclick="removeRow('relation_A', 1)"><i class="icon-minus"></i></button></td>
+                                </tr>
+                                <tr id="2">
+                                    <td><input id="id" type="text" value="2" /></td>
+                                    <td><input id="name" type="text" value="Петров" /></td>
+                                    <td><button class="btn btn-warning" onclick="removeRow('relation_A', 2)"><i class="icon-minus"></i></button></td>
+                                </tr>
+                                <tr class="info">
+                                    <td><input id="id" type="text" value="" placeholder="Идентификатор" /></td>
+                                    <td><input id="name" type="text" value="" placeholder="Имя" /></td>
+                                    <td><button class="btn" onclick="addRow('relation_A')"><i class="icon-plus"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </p>
+                </div>
+                <hr />
+                <div class="row-fluid">
+                    <table id="relation_B" class="table">
+                        <caption class="text-info"><h3>Отношение Б</h3></caption>
+                        <thead>
+                            <tr>
+                                <th>Идентификатор</th>
+                                <th>Деталь</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="3">
+                                <td><input id="id" type="text" value="1" /></td>
+                                <td><input id="name" type="text" value="Винт" /></td>
+                                <td><button class="btn btn-warning" onclick="removeRow('relation_B', 3)"><i class="icon-minus"></i></button></td>
+                            </tr>
+                            <tr id="4">
+                                <td><input id="id" type="text" value="2" /></td>
+                                <td><input id="name" type="text" value="Гайка" /></td>
+                                <td><button class="btn btn-warning" onclick="removeRow('relation_B', 4)"><i class="icon-minus"></i></button></td>
+                            </tr>
+                            <tr class="info">
+                                <td><input id="id" type="text" value="" placeholder="Идентификатор" /></td>
+                                <td><input id="name" type="text" value="" placeholder="Название" /></td>
+                                <td><button class="btn" onclick="addRow('relation_B')"><i class="icon-plus"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pull-right">
+                    <p>
+                        <button class="btn btn-primary btn-large" onclick="product('relation_A', 'relation_B', 'relation_AB')">Произведение</button>
+                    </p>
+                </div>
+                <div class="row-fluid">
+                     <table id="relation_AB" class="table table-bordered" style="display:none">
+                        <caption class="text-info"><h3>Отношение А TIMES Б</h3></caption>
+                        <thead>
+                            <tr>
+                                <th>Идентификатор (поставщик)</th>
+                                <th>Поставщик</th>
+                                <th>Идентификатор (деталь)</th>
+                                <th>Деталь</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script src="../assets/js/bootstrap.js" type="text/javascript"></script>
+
+    <script src="../js/operations.js" type="text/javascript"></script>
+    <script src="../js/tables.js" type="text/javascript"></script>
+    <script>
+
+        $(function () {
+            $("#tabs a").click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+        })
+
+    </script>
+</body>
